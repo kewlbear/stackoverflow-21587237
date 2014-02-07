@@ -7,14 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import <MessageUI/MessageUI.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    
+    MFMailComposeViewController* vc = [[MFMailComposeViewController alloc] init];
+    NSString* body = @"XXII Олимпийские зимние игры\nЖАРКИЕ. ЗИМНИЕ. ТВОИ.\n7-23 февраля 2014";
+//    body = [NSString stringWithFormat:@"<html><head><meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" /></head><body>%@</body></html>", body];
+    body = [@[body] description];
+    [vc setMessageBody:body isHTML:YES];
+    _window.rootViewController = vc;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
